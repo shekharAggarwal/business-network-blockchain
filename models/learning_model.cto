@@ -1,0 +1,44 @@
+
+namespace org.learning.network
+
+abstract asset Product identified by pId {
+  o String pId
+}
+
+asset Coffee extends Product {
+  o String originCity
+}
+
+asset Cafe extends Product {
+-->Coffee[] Coffee
+}
+
+participant Manufacturer identified by mId {
+  o String mId
+  o String name
+  o String city
+  o ProductType product
+}
+
+enum ProductType {
+  o Apple
+  o Banana
+  o Orange
+  o Coffee
+}
+
+abstract concept Address {
+  o String  street
+  o String city default="New York"
+  o String pinCode regex=/^[0-9]{6}/
+  o Integer year range = [2000,2020]
+}
+
+concept UnitedStatesAddress extends Address {
+  o String poBox
+}
+
+transaction Trade {
+-->Coffee coffee
+o Integer count
+}
